@@ -1,0 +1,143 @@
+<?php
+/**
+ * @file
+ * Code for the GSB Social feature.
+ */
+
+include_once 'gsb_social.features.inc';
+
+function gsb_social_block_info() {
+  $blocks['gsb_social_buttons'] = array(
+    'info' => t('Social buttons'),
+    'cache' => DRUPAL_CACHE_PER_PAGE,
+  );
+
+  return $blocks;
+}
+
+function gsb_social_block_view($delta = '') {
+  if ($delta == 'gsb_social_buttons') {
+    $block['subject'] = t('Social');
+    $node = menu_get_object();
+    $block['content'] = array(
+      '#theme' => 'gsb_social_buttons',
+      '#object' => $node,
+    );
+
+    return $block;
+  }
+}
+/**
+ * Implements hook_theme().
+ *  - Define social button theming functions.
+ */
+function gsb_social_theme() {
+  return array(
+    'gsb_social_buttons' => array(
+      'variables' => array('object' => NULL, 'options' => array()),
+    ),
+    'gsb_twitter_button' => array(
+      'variables' => array('object' => NULL, 'options' => array()),
+    ),
+    'gsb_facebook_share' => array(
+      'variables' => array('object' => NULL, 'options' => array()),
+    ),
+    'gsb_gplus_button' => array(
+      'variables' => array('object' => NULL, 'options' => array()),
+    ),
+    'gsb_linkedin_button' => array(
+      'variables' => array('object' => NULL, 'options' => array()),
+    ),
+  );
+}
+
+/**
+ * Render social buttons.
+ */
+function theme_gsb_social_buttons($variables) {
+  // Use absolute URL built with entity_uri to avoid posting with node/nid URLs when aliases available.
+  $uri = entity_uri('node', $variables['object']);
+  $uri = url($uri['path'], array('absolute' => TRUE));
+
+  // Allow URL option to be defined from outside, as well as any other options reusable by all widgets.
+  // URL is defaulted to entity_uri.
+  $variables['options'] = $variables['options'] + array('uri' => $uri);
+
+  // Iterate throw plugins and call their own theming function.
+  $plugins = array('gsb_twitter_button', 'gsb_facebook_share', 'gsb_gplus_button', 'gsb_linkedin_button');
+
+  $items = array();
+  foreach ($plugins as $plugin) {
+    $items[] = theme($plugin, array('object' => $variables['object'], 'options' => $variables['options']));
+  }
+
+  return theme('item_list', array('items' => $items, 'type' => 'ul', 'attributes' => array('class' => 'gsb-social-buttons')));
+}
+
+/**
+ * Render twitter button
+ */
+function theme_gsb_twitter_button($variables) {
+  global $language;
+
+  $script_url = url('http://platform.twitter.com/widgets.js', array('external' => TRUE));
+  drupal_add_js($script_url, array('type' => 'external', 'scope' => 'footer'));
+
+  $attributes =  array(
+    'data-via'     => 'StanfordBiz',
+    'data-url'     => $variables['options']['uri'],
+    'data-lang'    => $language->language,
+    'class'        => 'twitter-share-button',
+  );
+
+  $tweet_link = l(t('Tweet'), 'http://twitter.com/share', array('attributes' => $attributes, 'external' => TRUE));
+  $link = '<div class="tweetbutton">' . $tweet_link . '</div>';
+
+  return $link;
+}
+
+/**
+ * Render facebook button
+ */
+function theme_gsb_facebook_share($variables) {
+  $output = '<div class="fb-share-button" data-href="' . $variables['options']['uri'] . '" data-type="button_count"></div>';
+
+  return $output;
+}
+
+/**
+ * Implements hook_page_build().
+ * Add Facebook Javascript SDK.
+ */
+function gsb_social_page_build(&$page) {
+  $page['page_top']['facebooksdk'] = array(
+    '#markup' => '
+      <div id="fb-root"></div>
+      <script>
+        (function(d, s, id) {
+          var js, fjs = d.getElementsByTagName(s)[0];
+          if (d.getElementById(id)) return;
+          js = d.createElement(s); js.id = id;
+          js.src = "//connect.facebook.net/en_US/sdk.js#xfbml=1&version=v2.0";
+          fjs.parentNode.insertBefore(js, fjs);
+        }(document, \'script\', \'facebook-jssdk\'));
+      </script>',
+    '#weight' => -10,
+  );
+}
+
+/**
+ * Render Google Plus button.
+ */
+function theme_gsb_gplus_button($variables) {
+  drupal_add_js('https://apis.google.com/js/platform.js', array('type' => 'external', 'scope' => 'footer'));
+  return '<div class="g-plusone" data-size="medium" data-href="' . $variables['options']['uri'] . '"></div>';
+}
+
+/**
+ * Render Linkedin button.
+ */
+function theme_gsb_linkedin_button($variables) {
+  drupal_add_js("//platform.linkedin.com/in.js", array('type' => 'external', 'scope' => 'footer'));
+  return '<script type="IN/Share" data-url="' . $variables['options']['uri'] .  '" data-counter="right"></script>';
+}
