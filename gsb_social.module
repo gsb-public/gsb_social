@@ -21,7 +21,7 @@ function gsb_social_block_view($delta = '') {
     $node = menu_get_object();
     $block['content'] = array(
       '#theme' => 'gsb_social_buttons',
-      '#object' => $node,
+      '#object' => !empty($node) ? $node : NULL,
     );
 
     return $block;
@@ -55,13 +55,15 @@ function gsb_social_theme() {
  * Render social buttons.
  */
 function theme_gsb_social_buttons($variables) {
-  // Use absolute URL built with entity_uri to avoid posting with node/nid URLs when aliases available.
-  $uri = entity_uri('node', $variables['object']);
-  $uri = url($uri['path'], array('absolute' => TRUE));
+  if (!empty($variables['object'])) {
+    // Use absolute URL built with entity_uri to avoid posting with node/nid URLs when aliases available.
+    $uri = entity_uri('node', $variables['object']);
+    $uri = url($uri['path'], array('absolute' => TRUE));
 
-  // Allow URL option to be defined from outside, as well as any other options reusable by all widgets.
-  // URL is defaulted to entity_uri.
-  $variables['options'] = $variables['options'] + array('uri' => $uri);
+    // Allow URL option to be defined from outside, as well as any other options reusable by all widgets.
+    // URL is defaulted to entity_uri.
+    $variables['options'] = $variables['options'] + array('uri' => $uri);
+  }
 
   // Iterate throw plugins and call their own theming function.
   $plugins = array('gsb_twitter_button', 'gsb_facebook_share', 'gsb_gplus_button', 'gsb_linkedin_button');
@@ -100,19 +102,9 @@ function theme_gsb_twitter_button($variables) {
  * Render facebook button
  */
 function theme_gsb_facebook_share($variables) {
-  $output = '<div class="fb-share-button" data-href="' . $variables['options']['uri'] . '" data-type="button_count"></div>';
-
-  return $output;
-}
-
-/**
- * Implements hook_page_build().
- * Add Facebook Javascript SDK.
- */
-function gsb_social_page_build(&$page) {
-  $page['page_top']['facebooksdk'] = array(
-    '#markup' => '
-      <div id="fb-root"></div>
+  // Add Facebook Javascript SDK. This can't be done with drupal_add_js().
+  $output =
+     '<div id="fb-root"></div>
       <script>
         (function(d, s, id) {
           var js, fjs = d.getElementsByTagName(s)[0];
@@ -121,9 +113,11 @@ function gsb_social_page_build(&$page) {
           js.src = "//connect.facebook.net/en_US/sdk.js#xfbml=1&version=v2.0";
           fjs.parentNode.insertBefore(js, fjs);
         }(document, \'script\', \'facebook-jssdk\'));
-      </script>',
-    '#weight' => -10,
-  );
+      </script>';
+
+  $output .= '<div class="fb-share-button" data-href="' . $variables['options']['uri'] . '" data-type="button_count"></div>';
+
+  return $output;
 }
 
 /**
