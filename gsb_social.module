@@ -6,6 +6,60 @@
 
 include_once 'gsb_social.features.inc';
 
+
+/**
+ * Implement hook_libraries_info().
+ */
+function gsb_social_libraries_info() {
+  $libraries['sharrre'] = array(
+    'name' => 'sharrre',
+    'vendor url' => 'https://github.com/gsbitse/Sharrre',
+    'download url' => 'https://github.com/gsbitse/Sharrre',
+    'version' => 'release-1.0',
+    'files' => array(
+      'js' => array(
+        'jquery.sharrre.js',
+      ),
+    ),
+  );
+
+  return $libraries;
+}
+
+/**
+ * Implements hook_page_build().
+ */
+function gsb_social_page_build(&$page) {
+  libraries_load('sharrre');
+}
+
+/**
+ * Implements hook_menu().
+ */
+function gsb_social_menu() {
+  $items['gsb-social/sharrre'] = array(
+    'title' => 'GSB Social Count',
+    'description' => 'Retrieves the count',
+    'page callback' => 'gsb_social_count',
+    'access arguments' => true,
+  );
+  return $items;
+}
+
+function gsb_social_count() {
+  $url = urlencode($_GET['url']);
+  $json = array('url'=>$url,'count'=>0);
+  $plus_count = 0;
+  $contents = _gsb_social_parse('https://plusone.google.com/u/0/_/+1/fastbutton?url=' . $url . '&count=true');
+  preg_match( '/window\.__SSR = {c: ([\d]+)/', $contents, $matches );
+  if(isset($matches[0])){
+    $plus_count = (int)str_replace('window.__SSR = {c: ', '', $matches[0]);
+  }
+  $json['count'] = $plus_count;
+  echo str_replace('\\/','/',json_encode($json));
+  return;
+}
+
 function gsb_social_block_info() {
   $blocks['gsb_social_buttons'] = array(
     'info' => t('Social buttons'),
@@ -17,6 +71,10 @@ function gsb_social_block_info() {
 
 function gsb_social_block_view($delta = '') {
   if ($delta == 'gsb_social_buttons') {
+
+    drupal_add_js(drupal_get_path('module', 'gsb_social') . '/js/gsb_social.js');
+    drupal_add_css(drupal_get_path('module', 'gsb_social') . '/css/gsb_social.css');
+
     $block['subject'] = t('Social');
     $node = menu_get_object();
     $block['content'] = array(
@@ -80,43 +138,21 @@ function theme_gsb_social_buttons($variables) {
  * Render twitter button
  */
 function theme_gsb_twitter_button($variables) {
-  global $language;
-
-  $script_url = url('http://platform.twitter.com/widgets.js', array('external' => TRUE));
-  drupal_add_js($script_url, array('type' => 'external', 'scope' => 'footer'));
-
-  $attributes =  array(
-    'data-via'     => 'StanfordBiz',
-    'data-url'     => $variables['options']['uri'],
-    'data-lang'    => $language->language,
-    'class'        => 'twitter-share-button',
-  );
-
-  $tweet_link = l(t('Tweet'), 'http://twitter.com/share', array('attributes' => $attributes, 'external' => TRUE));
-  $link = '<div class="tweetbutton">' . $tweet_link . '</div>';
-
-  return $link;
+  global $base_url;
+  $url = $base_url . request_path();
+  $output =
+    '<div class="sharrre-twitter" data-url="' . $url . '" data-text="" data-title="Tweet"></div>';
+  return $output;
 }
 
 /**
  * Render facebook button
  */
 function theme_gsb_facebook_share($variables) {
-  // Add Facebook Javascript SDK. This can't be done with drupal_add_js().
+  global $base_url;
+  $url = $base_url . request_path();
   $output =
-     '<div id="fb-root"></div>
-      <script>
-        (function(d, s, id) {
-          var js, fjs = d.getElementsByTagName(s)[0];
-          if (d.getElementById(id)) return;
-          js = d.createElement(s); js.id = id;
-          js.src = "//connect.facebook.net/en_US/sdk.js#xfbml=1&version=v2.0";
-          fjs.parentNode.insertBefore(js, fjs);
-        }(document, \'script\', \'facebook-jssdk\'));
-      </script>';
-
-  $output .= '<div class="fb-share-button" data-href="' . $variables['options']['uri'] . '" data-type="button_count"></div>';
-
+    '<div class="sharrre-facebook" data-url="' . $url . '" data-text="" data-title="Share"></div>';
   return $output;
 }
 
@@ -124,14 +160,52 @@ function theme_gsb_facebook_share($variables) {
  * Render Google Plus button.
  */
 function theme_gsb_gplus_button($variables) {
-  drupal_add_js('https://apis.google.com/js/platform.js', array('type' => 'external', 'scope' => 'footer'));
-  return '<div class="g-plusone" data-size="medium" data-href="' . $variables['options']['uri'] . '"></div>';
+  global $base_url;
+  $url = $base_url . request_path();
+  $output =
+    '<div class="sharrre-googleplus" data-url="' . $url . '" data-text="" data-title="+1"></div>';
+  return $output;
 }
 
 /**
  * Render Linkedin button.
  */
 function theme_gsb_linkedin_button($variables) {
-  drupal_add_js("//platform.linkedin.com/in.js", array('type' => 'external', 'scope' => 'footer'));
-  return '<script type="IN/Share" data-url="' . $variables['options']['uri'] .  '" data-counter="right"></script>';
+  global $base_url;
+  $url = $base_url . request_path();
+  $output =
+    '<div class="sharrre-linkedin" data-url="' . $url . '" data-text="" data-title="LinkedIn"></div>';
+  return $output;
+}
+
+function _gsb_social_parse($encUrl) {
+  $options = array(
+    CURLOPT_RETURNTRANSFER => true, // return web page
+    CURLOPT_HEADER => false, // don't return headers
+    CURLOPT_FOLLOWLOCATION => true, // follow redirects
+    CURLOPT_ENCODING => "", // handle all encodings
+    CURLOPT_USERAGENT => 'sharrre', // who am i
+    CURLOPT_AUTOREFERER => true, // set referer on redirect
+    CURLOPT_CONNECTTIMEOUT => 5, // timeout on connect
+    CURLOPT_TIMEOUT => 10, // timeout on response
+    CURLOPT_MAXREDIRS => 3, // stop after 10 redirects
+    CURLOPT_SSL_VERIFYHOST => 0,
+    CURLOPT_SSL_VERIFYPEER => false,
+  );
+  $ch = curl_init();
+
+  $options[CURLOPT_URL] = $encUrl;
+  curl_setopt_array($ch, $options);
+
+  $content = curl_exec($ch);
+  $err = curl_errno($ch);
+  $errmsg = curl_error($ch);
+
+  curl_close($ch);
+
+  if ($errmsg != '' || $err != '') {
+    /*print_r($errmsg);
+    print_r($errmsg);*/
+  }
+  return $content;
 }
