@@ -11,7 +11,7 @@
           enableTracking: true,
           buttons: { twitter: {via: '_JulienH'}},
           click: function(api, options){
-            api.simulateClick();
+            api.simulateClick('sharrre-twitter');
             api.openPopup('twitter');
           }
         });
@@ -24,7 +24,7 @@
           buttons: { facebook: {action: 'share', title: 'Share'}},  
           click: function(api, options){
             ga('send', 'social', 'facebook', 'share', document.location.href);
-            api.simulateClick();
+            api.simulateClick('sharrre-facebook');
             api.openPopup('facebook');
           }
         });
@@ -36,7 +36,7 @@
           enableHover: false,
           enableTracking: true,
           click: function(api, options){
-            api.simulateClick();
+            api.simulateClick('sharrre-googleplus');
             api.openPopup('googlePlus');
           }
         }); 
@@ -47,7 +47,7 @@
           enableHover: false,
           enableTracking: true,
           click: function(api, options){
-            api.simulateClick();
+            api.simulateClick('sharrre-linkedin');
             api.openPopup('linkedin');
           }
         }); 
