@@ -41,7 +41,7 @@ function gsb_social_menu() {
     'title' => 'GSB Social Count',
     'description' => 'Retrieves the count',
     'page callback' => 'gsb_social_count',
-    'access arguments' => true,
+    'access arguments' => array('access content')
   );
   return $items;
 }
