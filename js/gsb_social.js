@@ -9,7 +9,7 @@
           },
           enableHover: false,
           enableTracking: true,
-          buttons: { twitter: {via: '_JulienH'}},
+          buttons: { twitter: {}},
           click: function(api, options){
             api.simulateClick('sharrre-twitter');
             api.openPopup('twitter');
