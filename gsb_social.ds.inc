@@ -18,7 +18,9 @@ function gsb_social_ds_custom_fields_info() {
   $ds_field->entities = array(
     'node' => 'node',
   );
-  $ds_field->ui_limit = 'idea_story|default';
+  $ds_field->ui_limit = 'announcement|default
+idea_story|default
+school_story|default';
   $ds_field->properties = array(
     'block' => 'gsb_social|gsb_social_buttons',
     'block_render' => '3',
@@ -33,7 +35,9 @@ function gsb_social_ds_custom_fields_info() {
   $ds_field->entities = array(
     'node' => 'node',
   );
-  $ds_field->ui_limit = 'idea_story|default';
+  $ds_field->ui_limit = 'announcement|default
+idea_story|default
+school_story|default';
   $ds_field->properties = array(
     'block' => 'gsb_social|gsb_social_buttons',
     'block_render' => '3',
