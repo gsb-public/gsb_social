@@ -26,7 +26,7 @@
             ga('send', 'social', {
               'socialNetwork': 'facebook',
               'socialAction': 'share',
-              'socialTarget': document.location.href
+              'socialTarget': this.url
             });
             api.simulateClick('sharrre-facebook');
             api.openPopup('facebook');
