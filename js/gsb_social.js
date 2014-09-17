@@ -9,7 +9,7 @@
           },
           enableHover: false,
           enableTracking: true,
-          buttons: { twitter: {via: '_JulienH'}},
+          buttons: { twitter: {}},
           click: function(api, options){
             api.simulateClick('sharrre-twitter');
             api.openPopup('twitter');
@@ -23,7 +23,11 @@
           enableTracking: true,
           buttons: { facebook: {action: 'share', title: 'Share'}},  
           click: function(api, options){
-            ga('send', 'social', 'facebook', 'share', document.location.href);
+            ga('send', 'social', {
+              'socialNetwork': 'facebook',
+              'socialAction': 'share',
+              'socialTarget': document.location.href
+            });
             api.simulateClick('sharrre-facebook');
             api.openPopup('facebook');
           }
