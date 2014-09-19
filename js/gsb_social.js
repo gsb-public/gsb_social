@@ -23,11 +23,6 @@
           enableTracking: true,
           buttons: { facebook: {action: 'share', title: 'Share'}},  
           click: function(api, options){
-            ga('send', 'social', {
-              'socialNetwork': 'facebook',
-              'socialAction': 'share',
-              'socialTarget': this.url
-            });
             api.simulateClick('sharrre-facebook');
             api.openPopup('facebook');
           }
