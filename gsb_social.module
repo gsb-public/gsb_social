@@ -219,3 +219,42 @@ function _gsb_social_get_short_url($node) {
   }
   return $url;
 }
+
+/**
+ * Implements hook_node_view().
+ *
+ * Set Google Analytics dimensions - key taxonomies and node type
+ */
+function gsb_social_node_view($node, $view_mode) {
+  $types = array('announcement', 'idea_story', 'school_story');
+  if (in_array($node->type, $types) && $view_mode == 'full') {
+    $language = $node->language;
+    $key_tax_id1 = -1;
+    $term1 = '';
+    if (!empty($node->field_key_taxonomy[$language][0]['target_id'])) {
+      $key_tax_id1 = $node->field_key_taxonomy[$language][0]['target_id'];
+      $term1 = taxonomy_term_load($key_tax_id1);
+      $term1 = $term1->name;
+    }
+    $key_tax_id2 = -1;
+    $term2 = '';
+    if (!empty($node->field_key_taxonomy[$language][1]['target_id'])) {
+      $key_tax_id2 = $node->field_key_taxonomy[$language][1]['target_id'];
+      $term2 = taxonomy_term_load($key_tax_id2);
+      $term2 = $term2->name;
+    }
+    $key_tax_id3 = -1;
+    $term3 = '';
+    if (!empty($node->field_key_taxonomy[$language][2]['target_id'])) {
+      $key_tax_id3 = $node->field_key_taxonomy[$language][2]['target_id'];
+      $term3 = taxonomy_term_load($key_tax_id3);
+      $term3 = $term3->name;
+    }
+    drupal_add_js(array('gsb_social' => array(
+      'type' => $node->type,
+      'key_tax1' => $term1,
+      'key_tax2' => $term2,
+      'key_tax3' => $term3,
+    )), 'setting');
+  }
+}
