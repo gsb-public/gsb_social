@@ -22,7 +22,28 @@ function gsb_social_libraries_info() {
       ),
     ),
   );
-
+  $libraries['jquery-scrolldepth'] = array(
+    'name' => 'jquery-scrolldepth',
+    'vendor url' => 'https://github.com/robflaherty/jquery-scrolldepth',
+    'download url' => 'https://github.com/robflaherty/jquery-scrolldepth',
+    'version' => 'release-1.0',
+    'files' => array(
+      'js' => array(
+        'jquery.scrolldepth.js',
+      ),
+    ),
+  );
+  $libraries['riveted'] = array(
+    'name' => 'riveted',
+    'vendor url' => 'https://github.com/robflaherty/riveted',
+    'download url' => 'https://github.com/robflaherty/riveted',
+    'version' => 'release-1.0',
+    'files' => array(
+      'js' => array(
+        'riveted.js',
+      ),
+    ),
+  );
   return $libraries;
 }
 
@@ -31,6 +52,8 @@ function gsb_social_libraries_info() {
  */
 function gsb_social_page_build(&$page) {
   libraries_load('sharrre');
+  libraries_load('jquery-scrolldepth');
+  libraries_load('riveted');
 }
 
 /**
