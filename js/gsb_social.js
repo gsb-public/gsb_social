@@ -50,9 +50,12 @@
             api.simulateClick('sharrre-linkedin');
             api.openPopup('linkedin');
           }
-        }); 
-
-      
+        });
+        if ($.scrollDepth) {
+          $.scrollDepth({
+            minHeight: 2000,
+          });
+        }
       }); // end document.ready 
     } // end attach
   }; // end Drupal.behaviors.gsb_social
