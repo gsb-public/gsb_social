@@ -226,6 +226,10 @@ function _gsb_social_get_short_url($node) {
  * Set Google Analytics dimensions - key taxonomies and node type
  */
 function gsb_social_node_view($node, $view_mode) {
+  /*
+   * We can remove this if the google analytics module custom
+   * dimensions works
+   *
   $types = array('announcement', 'idea_story', 'school_story');
   if (in_array($node->type, $types) && $view_mode == 'full') {
     $language = $node->language;
@@ -257,4 +261,5 @@ function gsb_social_node_view($node, $view_mode) {
       'key_tax3' => $term3,
     )), 'setting');
   }
+  */
 }

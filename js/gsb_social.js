@@ -3,23 +3,6 @@
   Drupal.behaviors.gsb_social = {
     attach: function (context, settings) {
       $(document).ready(function() {
-        // Set Google Analytics dimensions - key taxonomies and node type
-        if (Drupal.settings.gsb_social.key_tax1 != '') {
-          ga('set', 'dimension1', Drupal.settings.gsb_social.key_tax1);
-          alert('.key_tax1 = '+ Drupal.settings.gsb_social.key_tax1);
-        }
-        if (Drupal.settings.gsb_social.key_tax2 != '') {
-          ga('set', 'dimension2', Drupal.settings.gsb_social.key_tax2);
-          alert('.key_tax2 = '+ Drupal.settings.gsb_social.key_tax2);
-        }
-        if (Drupal.settings.gsb_social.key_tax3 != '') {
-          ga('set', 'dimension3', Drupal.settings.gsb_social.key_tax3);
-          alert('.key_tax3 = '+ Drupal.settings.gsb_social.key_tax3);
-        }
-        if (Drupal.settings.gsb_social.type != '') {
-          ga('set', 'dimension4', Drupal.settings.gsb_social.type);
-          alert('.type = '+ Drupal.settings.gsb_social.type);
-        }
         // config the social sharrre buttons
         $('.sharrre-twitter').sharrre({
           share: {
