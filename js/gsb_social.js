@@ -3,9 +3,7 @@
   Drupal.behaviors.gsb_social = {
     attach: function (context, settings) {
       $(document).ready(function() {
-        
         // config the social sharrre buttons
-
         $('.sharrre-twitter').sharrre({
           share: {
             twitter: true
