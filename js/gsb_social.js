@@ -56,6 +56,13 @@
             minHeight: 2000,
           });
         }
+        if (riveted) {
+          riveted.init({
+            reportInterval: 10,  // Default: 5
+            idleTimeout: 20,      // Default: 30
+            nonInteraction: true  // Default: true
+          });
+        }
       }); // end document.ready 
     } // end attach
   }; // end Drupal.behaviors.gsb_social
