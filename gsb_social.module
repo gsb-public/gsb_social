@@ -141,7 +141,7 @@ function theme_gsb_social_buttons($variables) {
 function theme_gsb_twitter_button($variables) {
   $url = _gsb_social_get_short_url($variables['object']);
   $output =
-    '<div class="sharrre-twitter" data-url="' . $url . '" data-text="" data-title="Tweet"></div>';
+    '<div class="sharrre-twitter" data-url="' . $url . '" data-text="" data-title="Twitter"></div>';
   return $output;
 }
 
@@ -151,7 +151,7 @@ function theme_gsb_twitter_button($variables) {
 function theme_gsb_facebook_share($variables) {
   $url = _gsb_social_get_short_url($variables['object']);
   $output =
-    '<div class="sharrre-facebook" data-url="' . $url . '" data-text="" data-title="Share"></div>';
+    '<div class="sharrre-facebook" data-url="' . $url . '" data-text="" data-title="Facebook"></div>';
   return $output;
 }
 
@@ -161,7 +161,7 @@ function theme_gsb_facebook_share($variables) {
 function theme_gsb_gplus_button($variables) {
   $url = _gsb_social_get_short_url($variables['object']);
   $output =
-    '<div class="sharrre-googleplus" data-url="' . $url . '" data-text="" data-title="+1"></div>';
+    '<div class="sharrre-googleplus" data-url="' . $url . '" data-text="" data-title="Google+"></div>';
   return $output;
 }
 
