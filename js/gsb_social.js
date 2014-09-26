@@ -75,35 +75,35 @@
         // config event clicks
 
         // Top Stories
-        jQuery(".content .node-idea-story .group-right .top-stories-wrapper a").click(function() {
+        $(".content .node-idea-story .group-right .top-stories-wrapper a").click(function() {
           alert('click top story');
         });        
 
         // Explore More
-        jQuery(".content .node-idea-story .group-left .explore-more-content .field-name-title a").click(function() {
+        $(".content .node-idea-story .group-left .explore-more-content .field-name-title a").click(function() {
           alert('click explore more');
         });        
 
         // Related Content
-        jQuery(".content .node-idea-story .group-right .field-name-field-related-faculty a").click(function() {
+        $(".content .node-idea-story .group-right .field-name-field-related-faculty a").click(function() {
           alert('click related content faculty');
         });        
 
-        jQuery(".content .node-idea-story .group-right .field-name-field-related-idea-story a").click(function() {
+        $(".content .node-idea-story .group-right .field-name-field-related-idea-story a").click(function() {
           alert('click related content idea story');
         });        
 
-        jQuery(".content .node-idea-story .group-right .field-collection-item-field-related-other-unlimited a").click(function() {
+        $(".content .node-idea-story .group-right .field-collection-item-field-related-other-unlimited a").click(function() {
           alert('click related content other');
         });        
 
         // Top Key Taxonomy Terms
-        jQuery(".content .node-idea-story .group-left .group_wrapper_header .field-name-field-key-taxonomy a").click(function() {
+        $(".content .node-idea-story .group-left .group_wrapper_header .field-name-field-key-taxonomy a").click(function() {
           alert('click top key taxonomy');
         });        
 
         // Bottom Taxonomy
-        jQuery(".content .node-idea-story .group-left .group_wrapper_taxonomy a").click(function() {
+        $(".content .node-idea-story .group-left .group_wrapper_taxonomy a").click(function() {
           alert('click bottom key taxonomy');
         });        
 
