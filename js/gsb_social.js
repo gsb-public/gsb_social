@@ -3,7 +3,9 @@
   Drupal.behaviors.gsb_social = {
     attach: function (context, settings) {
       $(document).ready(function() {
+        
         // config the social sharrre buttons
+
         $('.sharrre-twitter').sharrre({
           share: {
             twitter: true
@@ -51,18 +53,6 @@
             api.openPopup('linkedin');
           }
         });
-        if ($.scrollDepth) {
-          $.scrollDepth({
-            minHeight: 2000,
-          });
-        }
-        if (riveted) {
-          riveted.init({
-            reportInterval: 10,  // Default: 5
-            idleTimeout: 20,      // Default: 30
-            nonInteraction: true  // Default: true
-          });
-        }
       }); // end document.ready 
     } // end attach
   }; // end Drupal.behaviors.gsb_social
