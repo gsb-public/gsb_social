@@ -22,7 +22,6 @@ function gsb_social_libraries_info() {
       ),
     ),
   );
-
   return $libraries;
 }
 
