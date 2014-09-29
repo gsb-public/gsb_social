@@ -25,15 +25,15 @@ function gsb_social_strongarm() {
     'indexes' => array(
       1 => array(
         'index' => 1,
-        'value' => '[node:field-key-taxonomy:1]',
+        'value' => '[node:field-key-taxonomy:0]',
       ),
       2 => array(
         'index' => 2,
-        'value' => '[node:field-key-taxonomy:2]',
+        'value' => '[node:field-key-taxonomy:1]',
       ),
       3 => array(
         'index' => 3,
-        'value' => '[node:field-key-taxonomy:3]',
+        'value' => '[node:field-key-taxonomy:2]',
       ),
       4 => array(
         'index' => 4,
