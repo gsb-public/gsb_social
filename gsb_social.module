@@ -29,10 +29,10 @@ function gsb_social_libraries_info() {
     'version' => 'release-1.0',
     'files' => array(
       'js' => array(
-        'selection-sharer.js',
+        'dist/selection-sharer.js',
       ),
       'css' => array(
-        'selection-sharer.css',
+        'dist/selection-sharer.css',
       ),
     ),
   );
