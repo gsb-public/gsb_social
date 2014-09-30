@@ -41,11 +41,24 @@ function gsb_social_libraries_info() {
 
 /**
  * Implements hook_page_build().
+ *
+ * Adds the sharrre social buttons.
+ * Also adds the selection-sharer if the node being displayed is:
+ *  an Announcement, an Idea Story or a School Story
  */
 function gsb_social_page_build(&$page) {
   libraries_load('sharrre');
-  libraries_load('selection-sharer');
-  drupal_add_js("jQuery(function () { var sharer = new SelectionSharer('p'); });", 'inline');
+  if (!empty($page['content']['system_main']['nodes'])) {
+    foreach ($page['content']['system_main']['nodes'] as $key => $value) {
+      if (is_numeric($key)) {
+        if (!empty($value['#bundle']) && in_array($value['#bundle'], array('idea_story', 'announcement', 'school_story'))) {
+          libraries_load('selection-sharer');
+          drupal_add_js("jQuery(function () { var sharer = new SelectionSharer('p, .file-resource-pull-quote'); });", 'inline');
+          break;
+        }
+      }
+    }    
+  }
 }
 
 /**
