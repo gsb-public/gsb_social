@@ -168,7 +168,7 @@ function theme_gsb_social_buttons($variables) {
 function theme_gsb_twitter_button($variables) {
   $url = _gsb_social_get_short_url($variables['object']);
   $output =
-    '<div class="sharrre-twitter" data-url="' . $url . '" data-text="" data-title="Twitter"></div>';
+    '<div class="sharrre-twitter" data-text="" data-title="Twitter"></div>';
   return $output;
 }
 
