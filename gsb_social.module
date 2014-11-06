@@ -245,5 +245,7 @@ function _gsb_social_get_short_url($node) {
   if ($url == '') {
     $url = $base_url . '/' . request_path();
   }
+  $parsed_url = parse_url($url);
+  $url = $parsed_url['host'] . $parsed_url['path'];
   return $url;
 }
