@@ -10,7 +10,7 @@
           },
           enableHover: false,
           enableTracking: true,
-          buttons: { twitter: { via: 'stanfordbiz' } },
+          buttons: { twitter: { via: 'stanfordbiz', url: document.location.href } },
           click: function(api, options){
             api.simulateClick('sharrre-twitter');
             api.openPopup('twitter');
