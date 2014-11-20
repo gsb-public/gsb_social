@@ -10,7 +10,7 @@
         // Strip paramaters
         newurl = newurl.replace(window.location.search, "");
         // Strip protocol
-        newurl = newurl.replace(/.*?:\/\//g, "");
+        newurl = newurl.replace(/.*?:\/\//g, "http://");
         $('.sharrre-twitter').sharrre({
           share: {
             twitter: true
