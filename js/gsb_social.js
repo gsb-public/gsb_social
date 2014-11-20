@@ -4,13 +4,20 @@
     attach: function (context, settings) {
       $(document).ready(function() {
         // config the social sharrre buttons
+
+        // Get the current url for twitter
+        var newurl = document.location.href;
+        // Strip paramaters
+        newurl = newurl.replace(window.location.search, "");
+        // Strip protocol
+        newurl = newurl.replace(/.*?:\/\//g, "");
         $('.sharrre-twitter').sharrre({
           share: {
             twitter: true
           },
           enableHover: false,
           enableTracking: true,
-          buttons: { twitter: { via: 'stanfordbiz', url: document.location.href } },
+          buttons: { twitter: { via: 'stanfordbiz', url: newurl } },
           click: function(api, options){
             api.simulateClick('sharrre-twitter');
             api.openPopup('twitter');
