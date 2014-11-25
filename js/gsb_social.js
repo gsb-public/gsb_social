@@ -9,8 +9,9 @@
         var newurl = document.location.href;
         // Strip paramaters
         newurl = newurl.replace(window.location.search, "");
-        // Strip protocol
+        // Force protocol to http.
         newurl = newurl.replace(/.*?:\/\//g, "http://");
+
         $('.sharrre-twitter').sharrre({
           share: {
             twitter: true
