@@ -166,8 +166,11 @@ function theme_gsb_social_buttons($variables) {
  * Render twitter button
  */
 function theme_gsb_twitter_button($variables) {
-  $output =
-    '<div class="sharrre-twitter" data-text="' . $variables['object']->title . '" data-title="Twitter"></div>';
+  $output = '';
+  if (!empty($variables['object'])) {
+    $output =
+      '<div class="sharrre-twitter" data-text="' . $variables['object']->title . '" data-title="Twitter"></div>';
+  }
   return $output;
 }
 
@@ -175,9 +178,12 @@ function theme_gsb_twitter_button($variables) {
  * Render facebook button
  */
 function theme_gsb_facebook_share($variables) {
-  $url = _gsb_social_get_short_url($variables['object']);
-  $output =
-    '<div class="sharrre-facebook" data-url="' . $url . '" data-text="" data-title="Facebook"></div>';
+  $output = '';
+  if (!empty($variables['object'])) {
+    $url = _gsb_social_get_short_url($variables['object']);
+    $output =
+      '<div class="sharrre-facebook" data-url="' . $url . '" data-text="" data-title="Facebook"></div>';
+  }
   return $output;
 }
 
@@ -185,9 +191,12 @@ function theme_gsb_facebook_share($variables) {
  * Render Google Plus button.
  */
 function theme_gsb_gplus_button($variables) {
-  $url = _gsb_social_get_short_url($variables['object']);
-  $output =
-    '<div class="sharrre-googleplus" data-url="' . $url . '" data-text="" data-title="Google+"></div>';
+  $output = '';
+  if (!empty($variables['object'])) {
+    $url = _gsb_social_get_short_url($variables['object']);
+    $output =
+      '<div class="sharrre-googleplus" data-url="' . $url . '" data-text="" data-title="Google+"></div>';
+  }
   return $output;
 }
 
@@ -195,9 +204,12 @@ function theme_gsb_gplus_button($variables) {
  * Render Linkedin button.
  */
 function theme_gsb_linkedin_button($variables) {
-  $url = _gsb_social_get_short_url($variables['object']);
-  $output =
-    '<div class="sharrre-linkedin" data-url="' . $url . '" data-text="" data-title="LinkedIn"></div>';
+  $output = '';
+  if (!empty($variables['object'])) {
+    $url = _gsb_social_get_short_url($variables['object']);
+    $output =
+      '<div class="sharrre-linkedin" data-url="' . $url . '" data-text="" data-title="LinkedIn"></div>';
+  }
   return $output;
 }
 
@@ -236,6 +248,9 @@ function _gsb_social_parse($encUrl) {
 function _gsb_social_get_short_url($node) {
   global $base_url;
   $url = '';
+  if ($node == null) {
+    return '';
+  }
   if (in_array($node->type, array('idea_story','school_story', 'announcement'))) {
     if (!empty($node->field_link_single)) {
       $url = $node->field_link_single[$node->language][0]['url'];
