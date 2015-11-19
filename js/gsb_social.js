@@ -19,6 +19,7 @@
             share: {
               twitter: true
             },
+            enableCounter: false,
             enableHover: false,
             enableTracking: true,
             buttons: { twitter: { via: 'stanfordbiz', url: newurl } },
@@ -31,6 +32,7 @@
             share: {
               facebook: true
             },
+            enableCounter: false,
             enableHover: false,
             enableTracking: true,
             buttons: { facebook: {action: 'share', title: 'Share'}},
@@ -43,6 +45,7 @@
             share: {
               googlePlus: true
             },
+            enableCounter: false,
             urlCurl: '/gsb-social/sharrre/google-plus-count',
             enableHover: false,
             enableTracking: true,
@@ -55,6 +58,7 @@
             share: {
               linkedin: true
             },
+            enableCounter: false,
             enableHover: false,
             enableTracking: true,
             click: function(api, options){
