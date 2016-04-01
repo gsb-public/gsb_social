@@ -19,6 +19,7 @@
             share: {
               twitter: true
             },
+            url: 'http://sharrre.com',
             enableCounter: false,
             enableHover: false,
             enableTracking: true,
@@ -32,6 +33,7 @@
             share: {
               facebook: true
             },
+            url: 'http://sharrre.com',
             enableHover: false,
             enableTracking: true,
             buttons: { facebook: {action: 'share', title: 'Share'}},
@@ -44,6 +46,7 @@
             share: {
               googlePlus: true
             },
+            url: 'http://sharrre.com',
             urlCurl: '/gsb-social/sharrre/google-plus-count',
             enableHover: false,
             enableTracking: true,
@@ -56,8 +59,10 @@
             share: {
               linkedin: true
             },
+            url: 'http://sharrre.com',
             enableHover: false,
             enableTracking: true,
+            buttons: { linkedin: {action: 'share', title: 'Share'}},
             click: function(api, options){
               api.simulateClick('sharrre-linkedin');
               api.openPopup('linkedin');
