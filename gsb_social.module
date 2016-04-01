@@ -18,7 +18,11 @@ function gsb_social_libraries_info() {
     'version' => 'release-1.0',
     'files' => array(
       'js' => array(
-        'jquery.sharrre.js',
+        'src/js/jquery.sharrre.js',
+        'src/js/platform/platform.js',
+        'src/js/platform/twitter.js',
+        'src/js/platform/facebook.js',
+        'src/js/platform/linkedin.js',
       ),
     ),
   );
