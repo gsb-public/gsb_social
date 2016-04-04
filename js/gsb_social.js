@@ -20,7 +20,7 @@
               twitter: true
             },
             url: 'http://sharrre.com',
-            enableCounter: false,
+            enableCounter: true,
             enableHover: false,
             enableTracking: true,
             buttons: { twitter: { via: 'stanfordbiz', url: newurl } },
