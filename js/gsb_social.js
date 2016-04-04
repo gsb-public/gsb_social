@@ -11,6 +11,7 @@
         newurl = newurl.replace(window.location.search, "");
         // Force protocol to http.
         newurl = newurl.replace(/.*?:\/\//g, "http://");
+        newurl = newurl.replace('public2-stage', 'www');
 
         $('.gsb-social-buttons').each(function() {
           var $buttons = $(this);
