@@ -11,20 +11,20 @@
         newurl = newurl.replace(window.location.search, "");
         // Force protocol to http.
         newurl = newurl.replace(/.*?:\/\//g, "http://");
+        //newurl = newurl.replace('gsbpublic1.dd:8082', 'gsb.stanford.edu');
         newurl = newurl.replace('public2-stage.', '');
 
         $('.gsb-social-buttons').each(function() {
           var $buttons = $(this);
-
           $buttons.find('.sharrre-twitter').sharrre({
             share: {
               twitter: true
             },
-            url: 'http://sharrre.com',
+            urlCount: true,
             enableCounter: true,
             enableHover: false,
             enableTracking: true,
-            buttons: { twitter: { via: 'stanfordbiz', url: newurl } },
+            buttons: { twitter: { via: 'stanfordbiz', url: '//opensharecount.com/count.json?url=' + newurl, count: true } },
             click: function(api, options){
               api.simulateClick('sharrre-twitter');
               api.openPopup('twitter');
