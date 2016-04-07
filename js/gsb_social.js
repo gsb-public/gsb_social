@@ -69,8 +69,11 @@
               api.openPopup('linkedin');
             }
           });
+          $buttons.find('.sharrre-email').on('click', function(context, settings) {
+            window.open("/gsb-social/emailshare/1/", "", "toolbar=0, status=0,width=" + "500px" + ", height=" + "300px");
+          });
         });
-      }); // end document.ready 
+      }); // end document.ready
     } // end attach
   }; // end Drupal.behaviors.gsb_social
 
