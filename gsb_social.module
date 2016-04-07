@@ -18,7 +18,11 @@ function gsb_social_libraries_info() {
     'version' => 'release-1.0',
     'files' => array(
       'js' => array(
-        'jquery.sharrre.js',
+        'src/js/jquery.sharrre.js',
+        'src/js/platform/platform.js',
+        'src/js/platform/twitter.js',
+        'src/js/platform/facebook.js',
+        'src/js/platform/linkedin.js',
       ),
     ),
   );
@@ -71,7 +75,59 @@ function gsb_social_menu() {
     'page callback' => 'gsb_social_count',
     'access arguments' => array('access content')
   );
+  $items['gsb-social/emailshare/%ctools_js'] = array(
+    'page callback' => 'gsb_social_email_form_callback',
+    'page arguments' => array(2),
+    'access callback' => TRUE,
+    'type' => MENU_CALLBACK,
+  );
   return $items;
+}
+
+/**
+* Ajax menu callback.
+**/
+
+function gsb_social_email_form_callback($ajax) {
+  if ($ajax) {
+    ctools_include('ajax');
+    ctools_include('modal');
+
+    $form_state = array(
+      'ajax' => TRUE,
+      'title' => t('Modal Form'),
+    );
+
+    $output = ctools_modal_form_wrapper('gsb_social_email_form', $form_state);
+    if (!empty($form_state['ajax_commands'])) {
+      $output = $form_state['ajax_commands'];
+    }
+
+    print ajax_render($output);
+    drupal_exit();
+  }
+  else {
+    return drupal_get_form('gsb_social_email_form');
+  }
+}
+
+/**
+* Drupal form to be put in a modal.
+**/
+function gsb_social_email_form($form, $form_state) {
+  $form = array();
+
+  $form['new_link_text'] = array(
+    '#type' => 'textfield',
+    '#title' => t('Link text'),
+  );
+
+  $form['submit'] = array(
+    '#type' => 'submit',
+    '#value' => t('Submit'),
+  );
+
+  return $form;
 }
 
 function gsb_social_count() {
@@ -134,6 +190,9 @@ function gsb_social_theme() {
     'gsb_linkedin_button' => array(
       'variables' => array('object' => NULL, 'options' => array()),
     ),
+    'gsb_email_button' => array(
+      'variables' => array('object' => NULL, 'options' => array()),
+    ),
   );
 }
 
@@ -152,7 +211,7 @@ function theme_gsb_social_buttons($variables) {
   }
 
   // Iterate throw plugins and call their own theming function.
-  $plugins = array('gsb_linkedin_button', 'gsb_facebook_share', 'gsb_twitter_button');
+  $plugins = array('gsb_linkedin_button', 'gsb_facebook_share', 'gsb_twitter_button', 'gsb_email_button');
 
   $items = array();
   foreach ($plugins as $plugin) {
@@ -209,6 +268,21 @@ function theme_gsb_linkedin_button($variables) {
     $url = _gsb_social_get_short_url($variables['object']);
     $output =
       '<div class="sharrre-linkedin" data-url="' . $url . '" data-text="" data-title="LinkedIn"></div>';
+  }
+  return $output;
+}
+
+/**
+ * Render Email button.
+ */
+function theme_gsb_email_button($variables) {
+  $output = '';
+  if (!empty($variables['object'])) {
+    $url = _gsb_social_get_short_url($variables['object']);
+    $output =
+      '<div class="sharrre-email" data-url="' . $url . '" data-text="" data-title="Email">
+        <div class="box"><a class="share" href="javascript:void(0);"><span>Email</span></a></div>
+       </div>';
   }
   return $output;
 }
