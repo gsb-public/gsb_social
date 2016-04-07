@@ -11,18 +11,20 @@
         newurl = newurl.replace(window.location.search, "");
         // Force protocol to http.
         newurl = newurl.replace(/.*?:\/\//g, "http://");
+        newurl = newurl.replace('gsbpublic2.dd:8082', 'gsb.stanford.edu');
+        newurl = newurl.replace('public2-stage.', '');
 
         $('.gsb-social-buttons').each(function() {
           var $buttons = $(this);
-
           $buttons.find('.sharrre-twitter').sharrre({
             share: {
               twitter: true
             },
-            enableCounter: false,
+            urlCount: true,
+            enableCounter: true,
             enableHover: false,
             enableTracking: true,
-            buttons: { twitter: { via: 'stanfordbiz', url: newurl } },
+            buttons: { twitter: { via: 'stanfordbiz', url: '//opensharecount.com/count.json?url=' + newurl, count: true } },
             click: function(api, options){
               api.simulateClick('sharrre-twitter');
               api.openPopup('twitter');
@@ -32,6 +34,7 @@
             share: {
               facebook: true
             },
+            url: 'http://sharrre.com',
             enableHover: false,
             enableTracking: true,
             buttons: { facebook: {action: 'share', title: 'Share'}},
@@ -44,6 +47,7 @@
             share: {
               googlePlus: true
             },
+            url: 'http://sharrre.com',
             urlCurl: '/gsb-social/sharrre/google-plus-count',
             enableHover: false,
             enableTracking: true,
@@ -56,12 +60,17 @@
             share: {
               linkedin: true
             },
+            url: 'http://sharrre.com',
             enableHover: false,
             enableTracking: true,
+            buttons: { linkedin: {action: 'share', title: 'Share'}},
             click: function(api, options){
               api.simulateClick('sharrre-linkedin');
               api.openPopup('linkedin');
             }
+          });
+          $buttons.find('.sharrre-email').on('click', function(context, settings) {
+            window.open("/gsb-social/emailshare/1/", "", "toolbar=0, status=0,width=" + "500px" + ", height=" + "300px");
           });
         });
       }); // end document.ready 
