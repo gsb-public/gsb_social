@@ -227,9 +227,13 @@ function theme_gsb_email_button($variables) {
   $output = '';
   if (!empty($variables['object'])) {
     $url = _gsb_social_get_short_url($variables['object']);
-    $subject = url($variables['object']->title);
-    $subject = substr($subject, 1);
     $body = $url;
+    $subject = url('From Stanford Business: ' . $variables['object']->title);
+    if ($variables['object']->type == 'program') {
+      $subject = url('Shared from Stanford GSB Executive Education');
+      $body = $variables['object']->title . '%0D%0A' . $url;
+    }
+    $subject = substr($subject, 1);
     $output =
       '<div class="sharrre-email" data-url="' . $url . '" data-text="" data-title="Email">
         <div class="box"><a class="share" href="mailto:' .
@@ -279,7 +283,7 @@ function _gsb_social_get_short_url($node) {
   if ($node == null) {
     return '';
   }
-  if (in_array($node->type, array('idea_story','school_story', 'announcement'))) {
+  if (in_array($node->type, array('idea_story', 'school_story', 'announcement'))) {
     if (!empty($node->field_link_single)) {
       $url = $node->field_link_single[$node->language][0]['url'];
     }
