@@ -159,7 +159,7 @@ function theme_gsb_social_buttons($variables) {
   }
 
   // Iterate throw plugins and call their own theming function.
-  $plugins = array('gsb_twitter_button','gsb_linkedin_button', 'gsb_facebook_share'); //, 'gsb_email_button');
+  $plugins = array('gsb_twitter_button','gsb_linkedin_button', 'gsb_facebook_share', 'gsb_email_button');
 
   $items = array();
   foreach ($plugins as $plugin) {
