@@ -24,7 +24,7 @@
             enableCounter: true,
             enableHover: false,
             enableTracking: true,
-            buttons: { twitter: { via: 'stanfordbiz', url: '//opensharecount.com/count.json?url=' + newurl, count: true } },
+            buttons: { twitter: { via: 'stanfordgsb', url: '//opensharecount.com/count.json?url=' + newurl, count: true } },
             click: function(api, options){
               api.simulateClick('sharrre-twitter');
               api.openPopup('twitter');
