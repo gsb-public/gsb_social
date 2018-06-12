@@ -20,6 +20,7 @@ function gsb_social_ds_custom_fields_info() {
   );
   $ds_field->ui_limit = 'announcement|default
 idea_story|default
+voices|default
 school_story|default';
   $ds_field->properties = array(
     'block' => 'gsb_social|gsb_social_buttons',
@@ -37,6 +38,7 @@ school_story|default';
   );
   $ds_field->ui_limit = 'announcement|default
 idea_story|default
+voices|default
 school_story|default';
   $ds_field->properties = array(
     'block' => 'gsb_social|gsb_social_buttons',
