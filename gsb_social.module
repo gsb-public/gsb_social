@@ -55,7 +55,7 @@ function gsb_social_page_build(&$page) {
   if (!empty($page['content']['system_main']['nodes'])) {
     foreach ($page['content']['system_main']['nodes'] as $key => $value) {
       if (is_numeric($key)) {
-        if (!empty($value['#bundle']) && in_array($value['#bundle'], array('idea_story', 'announcement', 'school_story'))) {
+        if (!empty($value['#bundle']) && in_array($value['#bundle'], array('idea_story', 'announcement', 'school_story', 'voices'))) {
           libraries_load('selection-sharer');
           drupal_add_js("jQuery(function () { var sharer = new SelectionSharer('p, .file-resource-pull-quote'); });", 'inline');
           break;
@@ -283,7 +283,7 @@ function _gsb_social_get_short_url($node) {
   if ($node == null) {
     return '';
   }
-  if (in_array($node->type, array('idea_story', 'school_story', 'announcement'))) {
+  if (in_array($node->type, array('idea_story', 'school_story', 'announcement', 'voices'))) {
     if (!empty($node->field_link_single)) {
       $url = $node->field_link_single[$node->language][0]['url'];
     }
