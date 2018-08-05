@@ -114,6 +114,8 @@ function gsb_social_block_view($delta = '') {
       '#object' => !empty($node) ? $node : NULL,
     );
 
+    $block['content']['#markup'] = drupal_render($block['content']);
+
     return $block;
   }
 }
