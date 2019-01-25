@@ -20,11 +20,10 @@
             share: {
               twitter: true
             },
-            urlCount: true,
-            enableCounter: true,
+            enableCounter: false,
             enableHover: false,
             enableTracking: true,
-            buttons: { twitter: { via: 'stanfordgsb', url: '//opensharecount.com/count.json?url=' + newurl, count: true } },
+            buttons: { twitter: {action: 'share', title: 'Share'}},
             click: function(api, options){
               api.simulateClick('sharrre-twitter');
               api.openPopup('twitter');
@@ -35,6 +34,7 @@
               facebook: true
             },
             url: 'http://sharrre.com',
+            enableCounter: false,
             enableHover: false,
             enableTracking: true,
             buttons: { facebook: {action: 'share', title: 'Share'}},
@@ -61,6 +61,7 @@
               linkedin: true
             },
             url: 'http://sharrre.com',
+            enableCounter: false,
             enableHover: false,
             enableTracking: true,
             buttons: { linkedin: {action: 'share', title: 'Share'}},
