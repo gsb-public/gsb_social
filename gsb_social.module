@@ -75,7 +75,22 @@ function gsb_social_menu() {
     'page callback' => 'gsb_social_count',
     'access arguments' => array('access content')
   );
+  $items['gsb-social/fake-twitter-count'] = array(
+    'title' => 'GSB Social Fake Twitter Count',
+    'description' => 'Retrieves the fake twitter count',
+    'page callback' => 'gsb_social_fake_twitter_count',
+    'access arguments' => array('access content')
+  );
   return $items;
+}
+
+function gsb_social_fake_twitter_count() {
+  $result = array(
+    'url' => $_GET["url"],
+    'count' => 0
+  );
+  drupal_json_output($result);
+  drupal_exit();
 }
 
 function gsb_social_count() {
