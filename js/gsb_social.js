@@ -16,14 +16,16 @@
 
         $('.gsb-social-buttons').each(function() {
           var $buttons = $(this);
+          var baseurl = window.location.origin;
           $buttons.find('.sharrre-twitter').sharrre({
             share: {
               twitter: true
             },
-            enableCounter: false,
+            urlCount: true,
+            enableCounter: true,
             enableHover: false,
             enableTracking: true,
-            buttons: { twitter: {action: 'share', title: 'Share'}},
+            buttons: { twitter: { via: 'stanfordgsb', url: baseurl = '/gsb-social/fake-twitter-count?url=' + newurl, count: true } },
             click: function(api, options){
               api.simulateClick('sharrre-twitter');
               api.openPopup('twitter');
@@ -34,7 +36,7 @@
               facebook: true
             },
             url: 'http://sharrre.com',
-            enableCounter: false,
+            enableCounter: true,
             enableHover: false,
             enableTracking: true,
             buttons: { facebook: {action: 'share', title: 'Share'}},
@@ -61,7 +63,6 @@
               linkedin: true
             },
             url: 'http://sharrre.com',
-            enableCounter: false,
             enableHover: false,
             enableTracking: true,
             buttons: { linkedin: {action: 'share', title: 'Share'}},
