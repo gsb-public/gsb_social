@@ -14,6 +14,10 @@
         //newurl = newurl.replace('gsbpublic1.dd:8082', 'gsb.stanford.edu');
         newurl = newurl.replace('public2-stage.', '');
 
+        $('.gsb-social-buttons').hide();
+        setTimeout(function() {
+          $('.gsb-social-buttons').show();
+        }, 1500);
         $('.gsb-social-buttons').each(function() {
           var $buttons = $(this);
           var baseurl = window.location.origin;
