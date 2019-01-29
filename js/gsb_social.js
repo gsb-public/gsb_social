@@ -29,7 +29,7 @@
             enableCounter: true,
             enableHover: false,
             enableTracking: true,
-            buttons: { twitter: { via: 'stanfordgsb', url: baseurl = '/gsb-social/fake-twitter-count?url=' + newurl, count: true } },
+            buttons: { twitter: { via: 'stanfordgsb', url: baseurl + '/gsb-social/fake-twitter-count?url=' + newurl, count: true } },
             click: function(api, options){
               api.simulateClick('sharrre-twitter');
               api.openPopup('twitter');
