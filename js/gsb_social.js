@@ -39,11 +39,11 @@
             share: {
               facebook: true
             },
-            url: 'http://sharrre.com',
+            urlCount: true,
             enableCounter: true,
             enableHover: false,
             enableTracking: true,
-            buttons: { facebook: {action: 'share', title: 'Share'}},
+            buttons: { facebook: { via: 'stanfordgsb', url: '/gsb-social/fake-twitter-count?url=' + newurl, count: true } },
             click: function(api, options){
               api.simulateClick('sharrre-facebook');
               api.openPopup('facebook');
