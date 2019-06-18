@@ -66,10 +66,10 @@
             share: {
               linkedin: true
             },
-            url: 'http://sharrre.com',
+            urlCount: true,
             enableHover: false,
             enableTracking: true,
-            buttons: { linkedin: {action: 'share', title: 'Share'}},
+            buttons: { via: 'stanfordgsb', url: '/gsb-social/fake-twitter-count?url=' + newurl, count: true } },
             click: function(api, options){
               api.simulateClick('sharrre-linkedin');
               api.openPopup('linkedin');
