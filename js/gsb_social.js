@@ -69,8 +69,8 @@
             urlCount: true,
             enableHover: false,
             enableTracking: true,
-            buttons: { via: 'stanfordgsb', url: '/gsb-social/fake-twitter-count?url=' + newurl, count: true } },
-            click: function(api, options){
+            buttons: { linkedin: { via: 'stanfordgsb', url: '/gsb-social/fake-twitter-count?url=' + newurl, count: true } },
+            click: function(api, options) {
               api.simulateClick('sharrre-linkedin');
               api.openPopup('linkedin');
             }
